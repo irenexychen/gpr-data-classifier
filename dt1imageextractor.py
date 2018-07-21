@@ -4,6 +4,7 @@ import sys
 import getopt
 from PIL import Image
 from ssi_filetypes.dt1file import DT1File
+import xml.etree.cElementTree as ET
 
 POSITIVE = "Hyperbola"
 NEGATIVE = "Negative"
@@ -14,12 +15,21 @@ img_dict = {"positive": [],
             "negative": []}
 
 # Number of points to grab around the hyperbola peak
-image_width_traces = 30
-image_points_above = 5
-image_points_below = 25
+image_width_traces = 15
+image_points_above = 1
+image_points_below = 15
 
 working_dir = ""
 output_dir = os.path.join(working_dir, "output")
+
+# root = ET.Element("root")
+# doc = ET.SubElement(root, "doc")
+
+# ET.SubElement(doc, "field1", name="blah").text = "some value1"
+# ET.SubElement(doc, "field2", name="asdfasd").text = "some vlaue2"
+
+# tree = ET.ElementTree(root)
+# tree.write("filename.xml")
 
 
 def read_rba_file(file_path):
@@ -187,3 +197,13 @@ if __name__ == "__main__":
             except IndexError as e:
                 print "Error generating image " + save_as
 
+
+def writeXMLs():
+    root = ET.Element("root")
+    doc = ET.SubElement(root, "doc")
+
+    ET.SubElement(doc, "field1", name="blah").text = "some value1"
+    ET.SubElement(doc, "field2", name="asdfasd").text = "some vlaue2"
+
+    tree = ET.ElementTree(root)
+    tree.write("filename.xml")
