@@ -4,8 +4,6 @@ import sys
 import getopt
 from PIL import Image
 from ssi_filetypes.dt1file import DT1File
-import xml.etree.cElementTree as ET
-
 
 working_dir = sys.argv[1]
 output_dir = os.path.join(working_dir, "output")
