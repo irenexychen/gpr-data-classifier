@@ -1,0 +1,8 @@
+"Name","Description","Count"
+"Hyperbola","",1
+"Flags/Fiducials","",1
+,,,,,,,,,,,,,
+"Tool","Interpretation","GPR Line","Position(ft)","X(ft)","Y(ft)","Depth(ft)","Time(ns)","Elevation(ft)","Amplitude(mV)","Velocity(ft/ns)","GPS-Easting (11S)","GPS-Northing (11S)","Latitude","Longtitude","GPS-Elevation","Comment"
+"Point","Hyperbola","New Lineset\LINEX2",8.416,16.302,12.309,0.778,4.57,551.083,23.692,0.328,247440.51,3934858.24,35.5252120,-119.7852822,168.21,""
+,,,,,,,,,,,,,
+"Flags/Fiducials","Flags/Fiducials","New Lineset\LINEX2",16.000,16.628,22.075,0.000,"N/A",N/A,"N/A",0.328,247440.61,3934861.22,35.5252388,-119.7852820,168.30,"F1"

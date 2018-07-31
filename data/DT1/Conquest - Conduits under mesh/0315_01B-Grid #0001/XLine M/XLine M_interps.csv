@@ -1,0 +1,10 @@
+"Name","Description","Count"
+"Hyperbola","",7
+"Tool","Interpretation","GPR Line","Position(ft)","X(ft)","Y(ft)","Depth(ft)","Time(ns)","Elevation(ft)","Amplitude(mV)","Velocity(ft/ns)","GPS-n/a","GPS-n/a","GPS-n/a","GPS-n/a","GPS-n/a","Comment"
+"Point","Hyperbola","0315_01B-Grid #0001\XLine M",0.554,0.554,4.000,0.372,2.14,N/A,-5.051,0.328,N/A,N/A,N/A,N/A,N/A,""
+"Point","Hyperbola","0315_01B-Grid #0001\XLine M",1.051,1.051,4.000,0.372,2.14,N/A,-4.857,0.328,N/A,N/A,N/A,N/A,N/A,""
+"Point","Hyperbola","0315_01B-Grid #0001\XLine M",1.579,1.579,4.000,0.372,2.14,N/A,-4.753,0.328,N/A,N/A,N/A,N/A,N/A,""
+"Point","Hyperbola","0315_01B-Grid #0001\XLine M",2.086,2.086,4.000,0.372,2.14,N/A,-5.446,0.328,N/A,N/A,N/A,N/A,N/A,""
+"Point","Hyperbola","0315_01B-Grid #0001\XLine M",2.614,2.614,4.000,0.335,1.93,N/A,3.079,0.328,N/A,N/A,N/A,N/A,N/A,""
+"Point","Hyperbola","0315_01B-Grid #0001\XLine M",3.151,3.151,4.000,0.351,2.02,N/A,2.187,0.328,N/A,N/A,N/A,N/A,N/A,""
+"Point","Hyperbola","0315_01B-Grid #0001\XLine M",3.649,3.649,4.000,0.351,2.02,N/A,-3.224,0.328,N/A,N/A,N/A,N/A,N/A,""
