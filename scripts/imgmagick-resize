@@ -1,0 +1,1 @@
+for filename in 'Sample Output - Dunton'/*.png; do convert "$filename" -resize 600% "$filename"; done
