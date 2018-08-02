@@ -3,7 +3,7 @@
 Proof-of-concept side project for Sensors and Software Inc.
 
 ### Background Information ###
-''' What is a hyperbola? '''
+##### What is a hyperbola? #####
 Hyperbolas are 
 
 
