@@ -1,0 +1,1 @@
+find $directory -type f -name "*.in
