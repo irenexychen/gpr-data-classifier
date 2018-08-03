@@ -1,0 +1,26 @@
+<annotation>
+	<folder>images</folder>
+	<filename>line2888_0-1282.jpg</filename>
+	<path>/home/irerenu/Documents/projects/gpr-data-classifier/Custom-Object-Detection/images/line2888_0-1282.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>500</width>
+		<height>350</height>
+		<depth>1</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>hyperbola</name>
+		<pose>Unspecified</pose>
+		<truncated>1</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>43</xmin>
+			<ymin>111</ymin>
+			<xmax>403</xmax>
+			<ymax>350</ymax>
+		</bndbox>
+	</object>
+</annotation>
