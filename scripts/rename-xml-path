@@ -1,2 +1,0 @@
-for FILE in *xml; do sed -i 's:<path>/home/irerenu/Documents/projects/gpr-data-classifier/data/sample_output_borden_enlarged/:<path>/home/irerenu/Documents/projects/gpr-data-classifier/Custom-Object-Detection/annotations/xmls/:g' $FILE; done
-

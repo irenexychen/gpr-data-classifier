@@ -1,3 +1,0 @@
-find "data" -type f -name "*.dt1" | while read file; do 
-mv "$file" "data/dt1-all/$(tr / _ <<< "$file")"
-done
