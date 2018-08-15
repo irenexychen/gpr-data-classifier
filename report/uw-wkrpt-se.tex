@@ -194,7 +194,7 @@ Each layer performs a transformation on a single vector input, and the learning 
 TODO Weights used as indentification model
 
 \subsubsection{Convolutional Neural Networks (CNN)}
-Since for this hyperbola identification problem, GPR data can be easily converted to images, thus CNN will be used for their suitability with image inputs. A CNN is a subset of multi-layer neural networks, characterized by their convolution layer process--the union of integrals, or how much two functions overlap as one passes over the other--usually used for image classification. This overlap is the main idea behind how common features between images is reinforced and extracted. Processing is achieved by obtaining the union of the product of input images as matrices.
+Since for this hyperbola identification problem, GPR data can be easily converted to images, thus CNN will be used for their suitability with image inputs. A CNN is a subset of multi-layer neural networks, characterized by their convolution layer process---the union of integrals, or how much two functions overlap as one passes over the other---usually used for image classification. This overlap is the main idea behind how common features between images is reinforced and extracted. Processing is achieved by obtaining the union of the product of input images as matrices.
 
 The common components of CNN model architecture as as follows: the convolutional layer, pooling layer, and fully-connected layer.
 
@@ -205,11 +205,11 @@ The common components of CNN model architecture as as follows: the convolutional
   \label{fig:cnn-neuron}
 \end{figure}
 
-Pooling is a transformation specific to convolutional neural networks: it combines clusters into a single entity to be used in the next layer, to summarize and condense previous operations. This step assumes an image input and condenses the input into a 3-dimensional array, a convolutional neuron as seen in Figure~\ref{fig:cnn-neuron}. Max pooling is a downsampling function which takes the largest value from the prior cluster, effectively reducing the volume of data to process.  
+Pooling is a transformation specific to convolutional neural networks: it combines clusters into a single entity to be used in the next layer, to condense and downsample previous operations with the intent to reduce parameters. This step assumes an image input and condenses the input into a 3-dimensional array, a convolutional neuron as seen in Figure~\ref{fig:cnn-neuron}. Max pooling, one of the most common types of pooling, is a downsampling function which takes the largest value from the prior cluster, effectively reducing the volume of data to process.  
 
-Concatenation step, ReLU layer TODO
+The convolution process is usually paired with a concatenation step as well as an activation ReLU layer. ReLU stands for rectified linear unit, a process to introduce non-linearity in the CNN, effectively performing $f(x) = max(0, x)$.  
 
-During the fully connected layer, the softmax function normalizes the output to be between 0 and 1, as a sigmoid function, similar to a categorical probability distribution. In this case, it should be executed in the end to bring the model closer to indicating the probability and likelihood of hyperbolas. 
+Finally, the fully connected (FC) layer flattens the transformed image matrix. During this FC layer, the softmax function normalizes the output to be between 0 and 1, as a sigmoid function, similar to a categorical probability distribution. In this case, it should be executed in the end to bring the model closer to indicating the probability and likelihood of hyperbolas. 
 
 \subsection{Inception V3}
 
