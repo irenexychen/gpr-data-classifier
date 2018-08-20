@@ -20,7 +20,7 @@ And here are some not so obvious hyperbolas:
 
 
 
-Mobilenet was chosen for its potential for real-time detection of hyperbolas in ground penetrating data. To read more about the comparison process between the suitability of different pre-trained models, refer to the (WIP) [report](WTR/work-term-report-draft1.odt). 
+Mobilenet was chosen for its potential for real-time detection of hyperbolas in ground penetrating data. To read more about the comparison process between the suitability of different pre-trained models, refer to the (WIP) [report](report/uw-wkrpt-se.pdf). 
 
 
 
