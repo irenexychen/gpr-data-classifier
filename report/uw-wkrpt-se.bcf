@@ -1924,8 +1924,14 @@
     <bcf:datasource type="file" datatype="bibtex">uw-wkrpt-bib.bib</bcf:datasource>
   </bcf:bibdata>
   <bcf:section number="0">
-    <bcf:citekey order="2">ref:</bcf:citekey>
-    <bcf:citekey order="3">ref:</bcf:citekey>
+    <bcf:citekey order="5">ref:</bcf:citekey>
+    <bcf:citekey order="6">ref:</bcf:citekey>
+    <bcf:citekey order="7">ref:</bcf:citekey>
+    <bcf:citekey order="8">ref:</bcf:citekey>
+    <bcf:citekey order="9">ref:</bcf:citekey>
+    <bcf:citekey order="10">ref:</bcf:citekey>
+    <bcf:citekey order="11">ref:</bcf:citekey>
+    <bcf:citekey order="12">ref:</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="none">

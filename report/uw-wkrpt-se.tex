@@ -86,7 +86,7 @@
 \program{Software Engineering}
 
 % Fill in the department chair's name.
-\chair{Dr.\ D.\ Rayside}
+\chair{Dr.\ Derek\ Rayside}
 
 % Fill in the department chair's mailing address.
 \chairaddress{Software Engineering\\*
@@ -116,22 +116,20 @@
 % After this, we must create a letter of submission.
 \begin{letter}
 
-The following work term report, entitled ``\thetitle'', has been prepared for \theemployer{} as my first work term report for my \theterm{} term. The objective of this work term report is to explore the feasibility of different machine learning models to the problem of hyperbola recognition and classification, in ground penetrating radar data. 
+The following work term report, entitled ``\thetitle'', has been prepared for \theemployer{} as my first work term report for my \theterm{} term. The objective of this work term report is to explore the feasibility of different machine learning models to the problem of hyperbola recognition and classification in ground penetrating radar data. 
 
-\theemployer{} is a major provider in ground penetrating radars, both software and hardware.
+I would like to thank my supervisor, Adam Fazzari for providing support and guidance along the way, as well as my co-workers for furthering my understanding of ground penetrating radars, from usage to data interpretation. Finally I would like to thank \theemployer{}, a major provider of ground penetrating radar systems, for creating this opportunity and setting me up with the dataset and other resources needed to retrain the models. 
 
-I would like to thank my supervisor, Adam Fazzari for providing support and guidance along the way, as well as my co-workers for furthering my understanding of ground penetrating radars, from usage to data interpretation. Finally I would like to thank \theemployer{} for providing for the data set and other resources needed to retrain the models. 
-
-% Note that I do not need to type out the boilerplate confirmation,
-% nor do I need to write a signature block.  This is generated for me.
-% We are now finished with the letter.
 \end{letter}
 
-% We continue with required sections, such as the Executive Summary.
 \section{Executive Summary}
 The following report investigates the suitability of a small sample of pre-trained machine learning models, in response to the challenge of identifying hyperbolas in ground penetrating radar (GPR). The problem stems from the fact that hyperbola artefacts in GPR data are highly contextual, and present themselves in many different forms. As such, streamlining the interpretation process with software aids for GPR users proves itself to be a challenge, due to this visual variety in the data.
 
-However, the identification of hyperbola may be solved with the use of machine learning training. Hence, the Inception V3 model, as well as MobileNet V2 model, and VGG 19 model will be compared to determine their suitability given restrictions to this identification problem, and ultimately proven by a proof-of-concept application to hyperbola identification.
+However, the identification of hyperbola may be solved with the use of machine learning training. Hence, and exploration of convolutional neural networks (CNN), followed by a comparison of three notable CNN models---the Inception V3 model, as well as MobileNet V2 model, and VGG 19 model---to determine their suitability given restrictions to this identification problem. The choice of model was then tested and ultimately proven by a proof-of-concept application to hyperbola identification.
+
+Based on limitations in labelled datasets, restricted training time as well as training environment, the decision to use TODO was made based on the tradeoff between model distributibility versus accuracy and training load. The final proof-of-concept model was able to achive TODO, and its resulting classifier output was XXmb in size, trained by YY labelled images.
+
+Recommendations about TODO based on these limitations were made, in hopes to further improve the performance of the model. 
 
 \subsection{Disclaimer}
 The pre-trained models and their retraining modules are publicly available on GitHub. They've been applied with proprietary GPR data provided by \thecompany{}  
@@ -142,7 +140,7 @@ The pre-trained models and their retraining modules are publicly available on Gi
 % labels, and the second pass to put in the right references.
 \tableofcontents
 \listoffigures
-\listoftables
+%\listoftables
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% REPORT BODY
@@ -191,12 +189,12 @@ In the most intuitive sense, neural networks is an imitation of how the human br
 
 Each layer performs a transformation on a single vector input, and the learning process is achieved by chaining these layers together, either cyclically or linearly. Deep learning refers to models with a great number of layers of transformations. The penultimate layer---the bottleneck---summarizes the extracted features, to allow the last layer to perform the classification task. 
 
-TODO Weights used as indentification model
+Finally, weights of a model is a measure of the strength of the reinforcements between connections---equivalent to the output parameters to be learned throughout training. 
 
 \subsubsection{Convolutional Neural Networks (CNN)}
 Since for this hyperbola identification problem, GPR data can be easily converted to images, thus CNN will be used for their suitability with image inputs. A CNN is a subset of multi-layer neural networks, characterized by their convolution layer process---the union of integrals, or how much two functions overlap as one passes over the other---usually used for image classification. This overlap is the main idea behind how common features between images is reinforced and extracted. Processing is achieved by obtaining the union of the product of input images as matrices.
 
-The common components of CNN model architecture as as follows: the convolutional layer, pooling layer, and fully-connected layer.
+The common components of CNN model architecture as as follows: the convolutional layer, ReLU layer, pooling layer, and fully-connected layer.
 
 \begin{figure}
   \centering
@@ -205,98 +203,93 @@ The common components of CNN model architecture as as follows: the convolutional
   \label{fig:cnn-neuron}
 \end{figure}
 
-Pooling is a transformation specific to convolutional neural networks: it combines clusters into a single entity to be used in the next layer, to condense and downsample previous operations with the intent to reduce parameters. This step assumes an image input and condenses the input into a 3-dimensional array, a convolutional neuron as seen in Figure~\ref{fig:cnn-neuron}. Max pooling, one of the most common types of pooling, is a downsampling function which takes the largest value from the prior cluster, effectively reducing the volume of data to process.  
+Pooling is a transformation specific to convolutional neural networks: it combines clusters into a single entity to be used in the next layer, to condense and downsample previous operations with the intent to reduce parameters. This step assumes an image input and condenses the input into a 3-dimensional array, a convolutional neuron as seen in Figure~\ref{fig:cnn-neuron}. Max pooling, one of the most common types of pooling, is a downsampling function which takes the largest value from the prior cluster, effectively reducing the volume of data to process. Downsampling is not only used to reduce processing load, but by discarding select information, it prevents the model to be overfitted to the training dataset as in Figure~\ref{fig:overfitting}, hence less accurately solving the real-life problem. 
 
-The convolution process is usually paired with a concatenation step as well as an activation ReLU layer. ReLU stands for rectified linear unit, a process to introduce non-linearity in the CNN, effectively performing $f(x) = max(0, x)$.  
+\begin{figure}
+  \centering
+  \includegraphics[height=4cm]{overfitting}
+  \caption{Example overfitted model classifiying between two classes, a case to be avoided.~\cite{ref:}}
+  \label{fig:overfitting}
+\end{figure}
+
+The convolution process is usually paired with a concatenation step as well as an activation ReLU layer. ReLU stands for rectified linear unit, a process to introduce non-linearity in the CNN, effectively performing $f(x) = max(0, x)$. This is a transformation on convolution outputs that doesn't affect the size of the matrix. 
 
 Finally, the fully connected (FC) layer flattens the transformed image matrix. During this FC layer, the softmax function normalizes the output to be between 0 and 1, as a sigmoid function, similar to a categorical probability distribution. In this case, it should be executed in the end to bring the model closer to indicating the probability and likelihood of hyperbolas. 
 
 \subsection{Inception V3}
 
-Inception V3 is a CNN of five convolutional layers, along with the typical max pooling and softmax functions. However, it differs from the standard design of CNN models by its successive stacking scattered throughout the model, between the convolutional layers, and is hence recognized as a deep training network.
+Inception V3, also previously known as GoogleNet, is a CNN of five convolutional layers, along with the typical max pooling and softmax functions. However, it differs from the standard design of CNN models by its successive stacking scattered throughout the model, between the convolutional layers, and is hence recognized as a deep training network.
 
-Moreover, Inception extracts features at multiple levels, computing $1\times 1$, $3\times 3$, as well as $5 \times 5$ convolutional layers, which are concatenated afterwards to cover greater depths. This particularity of the model allows detection 
+\begin{figure}
+  \centering
+  \includegraphics[height=11cm]{inception-architecture}
+  \caption{Inception V3's CNN model architecture as described.~\cite{ref:}}
+  \label{fig:inception-architecture}
+\end{figure}
 
-As such, the precision of this model can reach TODO.
+Moreover, Inception extracts features at multiple levels, computing $1\times 1$, $3\times 3$, as well as $5 \times 5$ convolutional layers, which are concatenated afterwards as seen in Figure~\ref{fig:inception-architecture}. This particularity of the model allows the training to not only cover greater depths, but allows better receptive field variability of inputs, which in turn leads to being able to detect hyperbolas of different scales when applied. As well, the usage of smaller convolution layers stacked to replace a larger input through factorization, as demonstrated in Figure~\ref{fig:convolution-substitution}, also reduces the process load to train the model. This design is due to the fact that convolutions with larger spacial filters are disproportionally computationally-heavy. 
 
-The trade-off of such deep training is in its training speed: the processing of both the amount of stacking as well as the differing types of convolutional layers is expensive to compute. Although pre-trained Inception model is used, it contains TODO more layers per iteration of image training compared to Mobilenet, and TODO more than VGG.
+\begin{figure}
+  \centering
+  \includegraphics[height=5cm]{convolution-substitution}
+  \caption{Factorizing and substituting convolution layers of smaller dimensions to cover the input matric.~\cite{ref:}}
+  \label{fig:convolution-substitution}
+\end{figure}
 
+Hence, Inception's multi-layer convolution process is extremely desirable. Moreover, unlike many CNN models, Inception skips intermediary activation layers, making its computational cost much lower than the other two models compared. This makes Inception a likely candidate to train our hyperbola classifier problem in an environment where memory and computational capacity of the hardware is limited. 
 
-As for the result of the model, the weights for Inception V3 are small, coming in at 96MB.
-
-
+As for the result of the model, the weights for Inception V3 are small, coming in at 92MB, with a total depth of 159 stacked layers per training iteration. 
 
 \subsection{MobileNet V2}
+MobileNet, as its name suggests, is a CNN model specifically tailored to run on resource constrained environment such as mobile platforms. 
+
+To lighten the processing, it applies a depth-wise separable process of convolutions similar to Inception. Essentially, a $3 \times 13$ factorized convolutional layer is applied to the input matrix linearly in the depth direction, then a $1 \times 1$ convolution concatenates the matrix back layer-wise called a point-wise convolution layer. A total of 14 batches of convolution processes throughout the model before one average pooling function followed by one fully connected layer is applied, ending with the typical softmax function.
+
+However, there is a trade-off in accuracy for this lightweight model.  
 
 
 \subsection{VGG 19}
-VGG 19 consists of five convolutional layers as well, $3 \times 3$ stacked on top of each other in increasing depth. Reducing volume size is handled by max pooling. Two fully-connected layers, each with 4,096 nodes are then followed by a softmax classifier (above).
+VGG 19 consists of five convolutional layers as well, $3 \times 3$ stacked on top of each other in increasing depth, designed by the Visual Geometry Group of Oxford. "19" stand for the number of weight layers in the network, the sum of five batches of convolutional layers as well as max pooling to reduce volume size and finally ending with two fully connected layers as well as a softmax process.
 
-"19" stand for the number of weight layers in the network.
+VGG's $3 \times 3$ convolutional layers amount to fixed reception fields. Hence, the model is limited to an optimal size of hyperbola to be detected, resulting to over-fitting the model to a certain type of expected GPR data input. 
 
-The smaller networks converged and were then used as initializations for the larger, deeper networks — this process is called pre-training.
-
- % It only performs 3×33\times 33×3 convolutions and 2×22\times 22×2 pooling all the way through. It is currently the most preferred choice in the community for extracting features from images.
-
-It is painfully slow to train.
-    1. The network architecture weights themselves are quite large (in terms of disk/bandwidth).
-Due to its depth and number of fully-connected nodes, VGG is over 533MB for VGG16 and 574MB for VGG19. This makes deploying VGG a tiresome task.
-We still use VGG in many deep learning image classification problems; however, smaller network architectures are often more desirable (such as SqueezeNet, GoogLeNet, etc.).
-
-Hence, the biggest drawbacks of VGG, despite its good depth and accuracy, would be hard to deploy onto Sensors and Software Inc’s GPR systems, and would only be something usable in EKKO Project, a post-processing software product.
+Based on the older AlexNet model---which is characterized by implementing a dropout function after each FC layer---the VGG model attempts to compensate for overfitting with a dropout process after each fully connected layer. 
 
 
+Hence, 
+
+advantageous of the VGG architecture over the other two models examined. 
+
+However, the downside of this phenomenal accuracy is in its difficult deployment and training process due to the great calculation requirements---a disadvantage both in processing speed and memory requirements. 
+
+The network architecture weights themselves are quite large,
+
+Due to its depth and number of fully-connected nodes, the VGG model itself is over 574MB for VGG19. Hence, the biggest drawbacks of VGG, despite its good depth and accuracy, would be hard to deploy onto Sensors and Software Inc’s GPR systems, and would only be something usable in EKKO Project, a post-processing software product, if it were running with a powerful GPU. 
 
 
-% Here is a figure.  You MUST cite the figure in the text before it appears.
-%
-% I include an external picture here.  This picture is called don-hires.pdf.
-% Notice how I do not specify the extension of the file.  pdfLaTeX knows
-% about PDFs only, so get your pictures into that format.
-%\begin{figure}
-%  \centering
-%  \includegraphics[height=3.0in]{convolutional-neuron}
-%  \caption{A neuron in a convolutional network condensing image inputs into a 3D entity.~\cite{ref:}}
-%\end{figure}
 
-% Here is a table.  You MUST cite the table in the text before it appears
-% in the document.
-%\begin{table}
-%  \caption{Typesetting special characters.}
-%  \label{tbl:chars}
-%  \centering
-%  \begin{tabular}{|r|l|}
-%    \hline
-%    \multicolumn{1}{|c|}{\textbf{Name}} &
-%    \multicolumn{1}{|c|}{\textbf{Symbol}} \\
-%    \hline\hline
-%    octothorpe   & \# \\
-%    dollar sign  & \$ \\
-%    percent sign & \% \\
-%    ampersand    & \& \\
-%    underscore   & \_ \\
-%    left brace   & \{ \\
-%    right brace  & \} \\
-%    tilde        & \textasciitilde  \\
-%    circumflex   & \textasciicircum \\
-%    backslash    & \textbackslash   \\
-%    \hline
-%    inverted exclaimation & < \\
-%    inverted question     & > \\
-%    less than    & \textless \\
-%    greater than & \textgreater \\
-%    \hline
-%  \end{tabular}
-%\end{table}
-
-
-% You must have a Conclusions section
 \section{Conclusions}
+Experimental results show that MobileNet is about 3 times as fast as Inception and 10 times as fast as VGG.
 
 
-% You must have a Recommendations section
+
+
 \section{Recommendations}
+My proof-of-concept consists of three training iterations
 
+
+However, this is but a limited comparison of a small selection of models---though three very successful models. 
+
+
+As well, needless to say, 
+hyperbola detection and identification has proven itself to be a problem difficult to tailor to 
+
+
+at this stage, the current proof-of-concept was trained within a manually created dataset, which is only a rough representation of hyperbola identification. To attempt to capture the full complexity of the problem, a better breadth of images---a wide variety of hyperbolas in different environments, different soil calibrations, different collection speeds and GPR stacking---is required to avoid the model to over-fit to noisy or coincidental features in the GPR data.
+
+
+No thorough understanding of the complexity of these machine learning models, which is a challenge to adapt and make changes to the CNN.
+If scaled or applied to the problem naively, certain computational gains during training can be lost, which immediately voids its advantage over other models. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% BACK MATTER
