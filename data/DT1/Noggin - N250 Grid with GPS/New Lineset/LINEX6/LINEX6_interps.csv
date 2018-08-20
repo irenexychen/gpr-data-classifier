@@ -1,4 +1,0 @@
-"Name","Description","Count"
-"Flags/Fiducials","",1
-"Tool","Interpretation","GPR Line","Position(ft)","X(ft)","Y(ft)","Depth(ft)","Time(ns)","Elevation(ft)","Amplitude(mV)","Velocity(ft/ns)","GPS-Easting (11S)","GPS-Northing (11S)","Latitude","Longtitude","GPS-Elevation","Comment"
-"Flags/Fiducials","Flags/Fiducials","New Lineset\LINEX6",16.160,9.526,21.912,0.000,"N/A",N/A,"N/A",0.328,247438.45,3934861.17,35.5252378,-119.7853058,168.40,"F1"
