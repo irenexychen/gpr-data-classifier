@@ -4,6 +4,8 @@ model.ckpt*
 
 # Tensorflow graph
 output_inference_graph/
+output_inference_graph_old/
+output_inference_graph_old1/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

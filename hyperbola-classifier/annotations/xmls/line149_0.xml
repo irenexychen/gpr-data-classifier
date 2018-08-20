@@ -1,13 +1,13 @@
 <annotation>
-	<folder>sample_output_borden_enlarged</folder>
+	<folder>images</folder>
 	<filename>line149_0.jpg</filename>
-	<path>/home/irerenu/Documents/projects/gpr-data-classifier/hyperbola-classifier/annotations/xmls/line149_0.jpg</path>
+	<path>/home/irerenu/Documents/projects/get-back-old-data/gpr-data-classifier/hyperbola-classifier/images/line149_0.jpg</path>
 	<source>
 		<database>Unknown</database>
 	</source>
 	<size>
-		<width>100</width>
-		<height>70</height>
+		<width>500</width>
+		<height>350</height>
 		<depth>1</depth>
 	</size>
 	<segmented>0</segmented>
@@ -17,10 +17,10 @@
 		<truncated>0</truncated>
 		<difficult>1</difficult>
 		<bndbox>
-			<xmin>23</xmin>
-			<ymin>21</ymin>
-			<xmax>74</xmax>
-			<ymax>64</ymax>
+			<xmin>142</xmin>
+			<ymin>104</ymin>
+			<xmax>338</xmax>
+			<ymax>308</ymax>
 		</bndbox>
 	</object>
 </annotation>
