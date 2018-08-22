@@ -1,0 +1,26 @@
+<annotation>
+	<folder>images</folder>
+	<filename>hyperbola98.jpg</filename>
+	<path>/home/irerenu/Documents/projects/gpr-data-classifier/hyperbola-classifier/images/hyperbola98.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>732</width>
+		<height>550</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>hyperbola</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>77</xmin>
+			<ymin>191</ymin>
+			<xmax>301</xmax>
+			<ymax>353</ymax>
+		</bndbox>
+	</object>
+</annotation>
