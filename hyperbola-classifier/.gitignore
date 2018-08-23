@@ -1,11 +1,8 @@
 faster_rcnn_resnet101_coco_11_06_2017
 ssd_mobilenet_v1_coco_11_06_2017
-model.ckpt*
 
 # Tensorflow graph
 output_inference_graph/
-output_inference_graph_old/
-output_inference_graph_old1/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
