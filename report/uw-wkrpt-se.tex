@@ -30,8 +30,8 @@
 \usepackage{indentfirst} % Indent first paragraph of each section
 
 % Use biblatex for references
-\usepackage[style=ieee,sorting=none,dateabbrev=false]{biblatex}
-\bibliography{uw-wkrpt-bib}
+% \usepackage[style=ieee,sorting=none,dateabbrev=false]{biblatex}
+% \addbibresource{uw-wkrpt-bib.bib}
 
 % This needs to be the last package loaded
 \usepackage[pdftex]{hyperref} % Generate PDF links and bookmarks.
@@ -116,20 +116,23 @@
 % After this, we must create a letter of submission.
 \begin{letter}
 
-The following work term report, entitled ``\thetitle'', has been prepared for \theemployer{} as my first work term report for my \theterm{} term. The objective of this work term report is to explore the feasibility of different machine learning models to the problem of hyperbola recognition and classification in ground penetrating radar data. 
+The following work term report, entitled ``\thetitle{}'', has been prepared for \theemployer{} as my first work term report for my \theterm{} term. The objective of this work term report is to explore the feasibility of different machine learning models to the problem of hyperbola recognition and classification in ground penetrating radar data. 
 
-I would like to thank my supervisor, Adam Fazzari for providing support and guidance along the way, as well as my co-workers for furthering my understanding of ground penetrating radars, from usage to data interpretation. Finally I would like to thank \theemployer{}, a major provider of ground penetrating radar systems, for creating this opportunity and setting me up with the dataset and other resources needed to retrain the models. 
+\theemployer{} is a major provider of ground penetrating radar solutions, offering over both software and hardware of various customized uses---from ice mapping purposes to utility locating and forensics as well as providing for disaster rescue missions.
+
+I would like to thank my supervisor, Adam Fazzari for providing support and guidance along the way, as well as my co-workers for furthering my understanding of geophysics and ground penetrating radars. Finally I would like to thank \theemployer{} for creating this opportunity and setting me up with the dataset and other resources needed to retrain the models. 
 
 \end{letter}
 
 \section{Executive Summary}
 The following report investigates the suitability of a small sample of pre-trained machine learning models, in response to the challenge of identifying hyperbolas in ground penetrating radar (GPR). The problem stems from the fact that hyperbola artefacts in GPR data are highly contextual, and present themselves in many different forms. As such, streamlining the interpretation process with software aids for GPR users proves itself to be a challenge due to the visual variety in GPR data.
 
-However, the identification of hyperbola may be solved with the use of machine learning training. Hence, and exploration of convolutional neural networks (CNN), followed by a comparison of three notable CNN models---the Inception V3 model, as well as MobileNet V1 model, and VGG 19 model---to determine their suitability given restrictions to this identification problem. The choice of model was then tested and ultimately proven by a proof-of-concept application to hyperbola identification.
+However, the identification of hyperbola may be solved with the use of machine learning training. Hence, this report explores the nature of convolutional neural networks (CNN), followed by a comparison of three notable CNN models---the Inception V3 model, as well as MobileNet V1 model, and VGG 19 model---to determine their suitability given restrictions to this identification problem. The choice of the CNN model was then tested with a proof-of-concept application to hyperbola identification.
 
-Based on limitations in labelled datasets, restricted training time as well as training environment, the decision to use MobileNet model was made based on the trade-off between model distributivity versus accuracy and training load, with a higher emphasis on its lightweight architecture. The final proof-of-concept model was able to achieve general hyperbola detection, of up to 13 detection per image. Its resulting classifier output was merely 22MB in size, trained by 171 labelled images for over 4000 steps.
+Based on limitations in labelled datasets, restricted training time as well as non-ideal training environment with limited processing power, the decision to use MobileNet model was made with the trade-off between model distributivity versus accuracy and training load in mind, with a higher emphasis on MobileNet's lightweight architecture. The final proof-of-concept trained model was able to achieve general hyperbola detection, of up to 14 hyperbola detections per image. Its resulting classifier output was merely 22MB in size, trained by 171 labelled images for over 6000 steps.
 
-Recommendations to TODO about the model's setup and training based on these limitations were made, in hopes to further improve the performance of the model. 
+Recommendations to optimize the model's setup and training based on these restrictions were made, in hopes to further improve the performance of the model. Finally, the report considers certain limitations which have affected the final result of the trained model.
+
 
 \subsection{Disclaimer}
 The pre-trained models and their retraining modules are publicly available on GitHub. They've been applied with proprietary GPR data provided by \thecompany{}  
@@ -154,47 +157,48 @@ The pre-trained models and their retraining modules are publicly available on Gi
 Ground Penetrating Radar (GPR) solutions serve a wide range of uses, from underground utility locating, to pavement or ice thickness mapping, to forensics as well as archaeology. However, because of this varied usage---combined with pre-processing and post-processing---GPR data presents itself in many various ways. Hence, interpretation of GPR data is one of the most error-prone aspects of using GPR solutions.
 
 \subsection{Problem Statement}
-One of the biggest challenges of GPR data interpretation is to avoid false positives, such as extreme ringing caused by metal, 
-as well as interference caused by rebounding air waves off the data collection site.
+One of the biggest challenges of GPR data interpretation is to avoid false positives, such as extreme ringing caused by metal, as well as interference caused by rebounding air waves off the data collection site.
 
-\thecompany{}'s software is able to apply velocity fitting and other transformations to GPR data to improve and simplify data interpretation, such as identifying false-positive air waves in GPR data through a calculation of its velocity. However, the first and most limiting step to this process is to allow the software to locate hyperbola---evidence of a disturbance in the soil caused by an object.
+\thecompany{}'s software is able to apply velocity fitting and other transformations to GPR data to improve and simplify data interpretation; such transformations can help identify false-positive air wave rebounds in GPR data through a calculation of data velocity. However, the first and most limiting step to streamlining this process is to allow the software to locate a hyperbola---evidence of a disturbance in the soil caused by an object.
 
 \subsection{Proposal of Solution}
 Since machine learning has been making advances in the field of computer vision, it seems to be a fit tool to solve this bottleneck in this interpretation process.
 
 Machine learning, in the broadest of terms, is a subset of computer science which allows programs to improve and "learn" without explicitly being told what exactly to do---the construction of algorithms to make predictions based on recognition of patterns on a data set and to make changes to itself so that its future performance is improved. 
 
-Specifically, object detection and localization problems generally involve training feature extraction: associating certain characteristics of the image with different weights of importance based on their reoccurrence. In this problem, a hyperbola feature might consist of its curved nature. In this case, the presence---or lack thereof---of hyperbolas in GPR data will be explored with machine learning solutions, as well as their differentiation from other forms of features in GPR data, such as metal ringing and boundaries in the soil.
+Specifically, object detection and localization problems generally involve training feature extraction: associating certain characteristics of the image with different weights of importance based on their reoccurrence. In this problem, a hyperbola feature might consist of its curved nature, fitted against an apex of the underground object to the straight line of the surface. In this case, the presence---or lack thereof---of hyperbolas in GPR data will be explored with machine learning solutions, as well as their differentiation from other forms of features in GPR data, such as metal ringing and boundaries in the soil.
 
-The follow section will be analysing the steps in a small sample of machine learning models, as well as the transferability and possibility of integration into existing GPR systems. The comparison process will be taking the following criteria into account:
+The follow section will be analysing the architecture and processes in a small sample of machine learning models, as well as the transferability and possibility of integration into existing GPR systems. The comparison process will be taking the following criteria into account:
 \begin{itemize}
-\item Correctness of learning, based on the core transformations of the architecture of the model
-\item Ease of being transferred for real-time detection, based on the model's cost of memory and processing on ARM systems
+\item Correctness and accuracy of learning, based on the core transformations of the architecture of the model
+\item Ease of being transferred for real-time detection, based on minimizing the model's cost of memory and processing on ARM systems
 \end{itemize} 
 
 For the sake of quickly creating a proof-of-concept model, transfer learning will be applied to an existing open-source pre-trained model. Transfer learning entails modifying layers of existing mature models to customize the model while retaining its generic base layers. Specifically, the following pre-trained models will be explored, chosen for their current popularity and abundant availability in terms of support and resources: 
 \begin{itemize}
 \item Inception V3
-\item MobileNet V2
+\item MobileNet V1
 \item VGG 19
 \end{itemize}
 
 % You must have either an Analysis or a Synthesis section.
 \section{Comparison \& Analysis}
-For the comparison of potential machine learning models, the general idea is to apply supervised learning, giving labelled datasets to distinguish hyperbolas in the image, then test the model with sets of unlabelled data of various degrees of resemblance to the training dataset.
+For the comparison of potential machine learning models, the general idea is to apply supervised learning, inputting labelled datasets to distinguish hyperbolas in the image, then testing the model with sets of unlabelled data of various degrees of resemblance to the inputted training dataset.
 
 \subsection{General Procedure}
 \subsubsection{Retraining Neural Networks}
 In the most intuitive sense, neural networks is an imitation of how the human brain works. Input features are weighted positively or negatively, forming and reinforcing connections between common features similar to neurons forming connections between each other.
 
-Each layer performs a transformation on a single vector input, and the learning process is achieved by chaining these layers together, either cyclically or linearly. Deep learning refers to models with a great number of layers of transformations. The penultimate layer---the bottleneck---summarizes the extracted features, to allow the last layer to perform the classification task. 
+Each layer performs a transformation on a single matrix input, and the learning process is achieved by chaining these layers together, either cyclically or linearly. Deep learning refers to models with a great number of layered transformations. The penultimate layer---the bottleneck---summarizes the extracted features, to allow the last layer to perform the classification task.
 
-Finally, weights of a model is a measure of the strength of the reinforcements between connections---equivalent to the output parameters to be learned throughout training. 
+Finally, weights of a model is a measure of the strength of the reinforcements between connections---equivalent to the output parameters to be learned throughout training and the final product used in order to deploy the model for real-life usage.
 
 \subsubsection{Convolutional Neural Networks (CNN)}
-Since for this hyperbola identification problem, GPR data can be easily converted to images, thus CNN will be used for their suitability with image inputs. A CNN is a subset of multi-layer neural networks, characterized by their convolution layer process---the union of integrals, or how much two functions overlap as one passes over the other---usually used for image classification. This overlap is the main idea behind how common features between images is reinforced and extracted. Processing is achieved by obtaining the union of the product of input images as matrices. \autocite[3]{cs231n_cnn}
+For this hyperbola identification problem, GPR data can be easily converted to images. Thus, convolutional neural networks(CNN) will be used for their suitability with image inputs and manipulations. A CNN is a subset of multi-layer neural networks, characterized by their convolution layer process---the union of integrals, or how much two functions overlap as one passes over the other---usually used for image classification. This overlap is the main idea behind how common features between images are reinforced and extracted. Processing is achieved by obtaining the union of the product of input images as matrices. \cite{ref:cs231n_cnn}
 
-The common components of CNN model architecture as as follows: the convolutional layer, the pooling layer, the ReLU activation layer and the fully-connected layer.
+The common components of CNN model architecture are as follow: the convolutional layer, the pooling layer, the ReLU activation layer and the fully-connected layer.
+
+The convolutional layer determines the receptive field of the model---a feature specific to CNN and object detection--- which is limited by the size of the convolution as well as its center. The receptive field is essentially the region in the input space that a CNN model can examine a feature, where the importance of the object is exponentially examined the closer it is located towards the center of the receptive field.  
 
 \begin{figure}
   \centering
@@ -203,26 +207,25 @@ The common components of CNN model architecture as as follows: the convolutional
   \label{fig:cnn-neuron}
 \end{figure}
 
-Pooling is a transformation specific to convolutional neural networks: it combines clusters into a single entity to be used in the next layer, to condense and downsample previous operations with the intent to reduce parameters. This step assumes an image input and condenses the input into a 3-dimensional array, a convolutional neuron as seen in Figure~\ref{fig:cnn-neuron}. Max pooling, one of the most common types of pooling, is a downsampling function which takes the largest value from the prior cluster, effectively reducing the volume of data to process. Downsampling is not only used to reduce processing load, but by discarding select information, it prevents the model to be overfitted to the training dataset as in Figure~\ref{fig:overfitting}, hence less accurately solving the real-life problem. 
+Pooling is a transformation specific to convolutional neural networks: it combines clusters into a single entity to be used in the next layer, to condense and downsample previous operations with the intent to reduce parameters. This step assumes an image input and condenses the input into a 3-dimensional array, a convolutional neuron as seen in Figure~\ref{fig:cnn-neuron}. Max pooling, one of the most common types of pooling, is a downsampling function which takes the largest value from the prior cluster, effectively reducing the volume of data to process. Downsampling is not only used to reduce processing load, but by discarding select information, it prevents the model to be overfitted too closely to the training dataset, and hence, less accurately solving the real-life problem, as demonstrated in Figure~\ref{fig:overfitting}.
 
 \begin{figure}
   \centering
-  \includegraphics[height=4cm]{overfitting}
-  \caption{Example overfitted model classifiying between two classes, a case to be avoided.~\cite{ref:}}
+  \includegraphics[height=5cm]{overfitting}
+  \caption{Example of an overfitted model classifiying two classes in green, a case to be avoided.~\cite{ref:}}
   \label{fig:overfitting}
 \end{figure}
+\pagebreak
+The convolution process is usually paired with a concatenation step as well as an activation ReLU layer. ReLU stands for rectified linear unit, a process to introduce non-linearity in the CNN---effectively performing $f(x) = max(0, x)$. This is a transformation on convolution outputs that doesn't affect the size of the matrix. 
 
-The convolution process is usually paired with a concatenation step as well as an activation ReLU layer. ReLU stands for rectified linear unit, a process to introduce non-linearity in the CNN, effectively performing $f(x) = max(0, x)$. This is a transformation on convolution outputs that doesn't affect the size of the matrix. 
-
-Finally, the fully connected (FC) layer flattens the transformed image matrix. During this FC layer, the softmax function normalizes the output to be between 0 and 1, as a sigmoid function, similar to a categorical probability distribution. In this case, it should be executed in the end to bring the model closer to indicating the probability and likelihood of hyperbolas. 
+Finally, the fully connected (FC) layer flattens the transformed image matrix. During this FC layer, the softmax function normalizes the output to land between 0 and 1, as a sigmoid function similar to a categorical probability distribution. In this case, it should be executed in the end to bring the model closer to indicating the probability and likelihood of hyperbolas. 
 
 \subsection{Inception V3}
-
-Inception V3, also previously known as GoogleNet, is a CNN of five convolutional layers, along with the typical max pooling and softmax functions. However, it differs from the standard design of CNN models by its successive stacking scattered throughout the model between the convolutional layers, and is hence recognized as a deep training network.
+Inception V3, also previously known as GoogleNet, is a CNN of 11 convolutional layers, along with the typical max pooling and softmax functions towards the end of the model. However, it differs from the standard design of CNN models by its successive stacking of different sized convolution functions scattered throughout the model between the convolutional layers, and is hence recognized as a deep training network.
 
 \begin{figure}
   \centering
-  \includegraphics[height=11cm]{inception-architecture}
+  \includegraphics[height=40mm]{inception-architecture}
   \caption{Inception V3's CNN model architecture as described.~\cite{ref:}}
   \label{fig:inception-architecture}
 \end{figure}
@@ -236,26 +239,33 @@ Simply, Inception extracts features at multiple levels, computing $1\times 1$, $
   \label{fig:convolution-substitution}
 \end{figure}
 
-Although Inception's multi-layer convolution process is extremely desirable, by increasing the density of data of this model, it drastically increases the computational costs. Large $5\times 5$ convolutional operations are exponentially more expensive to compute, compared to their $3\times 3$ and $1\times 1$ counterparts.
+Although Inception's multi-layer convolution process is extremely desirable, by increasing the density of data of this model, it drastically increases the computational costs. The presence of large $5\times 5$ convolutional operations are exponentially more expensive to compute, compared to their $3\times 3$ and $1\times 1$ counterparts.
 
-
-Unlike many CNN models, Inception skips intermediary activation layers, making its computational cost much lower than the other two models compared. This makes Inception a likely candidate to train our hyperbola classifier problem in an environment where memory and computational capacity of the hardware is limited.
-
-As for the result of the model, the weights for Inception V3 are small, coming in at 92MB, with a total depth of 159 stacked layers per training iteration. 
-
-\subsection{MobileNet V1}
-MobileNet, as its name suggests, is a CNN model specifically tailored to run on resource constrained environment such as mobile platforms. 
-
-To lighten the processing, it applies a depth-wise separable process of convolutions similar to Inception (Figure ~\ref{fig:depthwise-separable-conv}). Essentially, a $3 \times 13$ factorized convolutional layer is applied to the input matrix linearly in the depth direction, then a $1 \times 1$ convolution concatenates the matrix back layer-wise called a point-wise convolution layer. MobileNet processes a total of 14 batches of convolution throughout the model, followed by one average pooling function as well as one fully connected layer, ending with the typical softmax function.
+Unlike many CNN models, Inception counters this computational bottleneck by skipping intermediary activation layers, making its computational cost much lower than the other two models compared. This makes Inception a likely candidate to train our hyperbola classifier problem in an environment where memory and computational capacity of the hardware is limited. Its accuracy doesn't seem to be highly impacted either. Inception V3 places quite highly for ImageNet's standards of Top-1 accuracy. ~\cite{ref:Canziani_et_al}
 
 \begin{figure}
   \centering
-  \includegraphics[height=4cm]{depthwise-separable-conv}
+  \includegraphics[height=5cm]{forward-time-power-cons}
+  \caption{In the paper "AN ANALYSIS OF DEEP NEURAL NETWORK MODELS
+FOR PRACTICAL APPLICATIONS" show satisfactory results of Inception V3 compared to other models trained under the same conditions.~\cite{ref:Canziani_et_al}}
+  \label{fig:forward-time-power-cons}
+\end{figure}
+
+As for the result of the model, the weights for Inception V3 are relatively small, coming in at 92MB, generated from a total depth of 159 stacked layers per training iteration.
+
+\subsection{MobileNet V1}
+MobileNet, as its name suggests, is a CNN model specifically tailored to run on resource constrained environment such as mobile platforms. This architecture is made of a total of 14 batches of convolution throughout the model, followed by one average pooling function as well as one fully connected layer, ending with the typical softmax function.
+
+To lighten the processing, it applies a depth-wise separable process of convolutions similar to Inception (Figure ~\ref{fig:depthwise-separable-conv}). Essentially, a $3 \times 13$ factorized convolutional layer is applied to the input matrix linearly in the depth direction, then a $1 \times 1$ convolution concatenates the matrix back layer-wise called a point-wise convolution layer. Unlike Inception, it doesn't contain any larger convolution processes expensive to process. This, on one hand, will lead to fast training and runtime, but on the other hand, limits the receptive field to slightly smaller hyperbola detected in the images. In the case of hyperbola detection, these features will not be located in the entirety of the input GPR data, thus it isn't a impactful trade-off.
+
+\begin{figure}
+  \centering
+  \includegraphics[height=66mm]{depthwise-separable-conv}
   \caption{Visualizing the depth-wise separable convolution process.~\cite{ref:}}
   \label{fig:depthwise-separable-conv}
 \end{figure}
 
-However, there is a trade-off in accuracy for this lightweight model. Using standards of ImageNet, in a comparison paper of these three models, MobileNet ranks on the lower end of the three models, achieving a Top-1 accuracy of 71.0---noticeably lower than both Inception V3 and VGG 19, as seen in Table \ref{tbl:top-1-comparison}
+However, there is a trade-off in accuracy for this lightweight model. Using standards of ImageNet, in a comparison paper of these three models, MobileNet ranks on the lower end of the three models, achieving a Top-1 accuracy of 71.0---noticeably lower than both Inception V3 and VGG 19, as seen in Table \ref{tbl:top-1-comparison}.
 
 \begin{table}
 \centering
@@ -274,12 +284,13 @@ However, there is a trade-off in accuracy for this lightweight model. Using stan
 \label{tbl:top-1-comparison}
 \end{table}
 
-However, since the size of weights of the model, an expected 22MB, i
+However, since the size of weights of the model---an expected 22MB---are significantly smaller, there seems to be a worthwhile trade-off when comparing the ratio of the model size to the accuracy reached. 
+
 
 \subsection{VGG 19}
 VGG 19 consists of five convolutional layers as well, $3 \times 3$ stacked on top of each other in increasing depth, designed by the Visual Geometry Group of Oxford. "19" stand for the number of weight layers in the network, the sum of five batches of convolutional layers as well as max pooling to reduce volume size and finally ending with two fully connected layers as well as a softmax process.
 
-VGG's $3 \times 3$ convolutional layers amount to fixed reception fields. Hence, the model is limited to an optimal size of hyperbola to be detected, resulting to over-fitting the model to a certain type of expected GPR data input.  
+VGG's $3 \times 3$ convolutional processes results in fixed reception fields, which is disadvantageous in terms of hyperbola detection accuracy. This may also lead to overfitting the model to be able to only detect certain types of hyperbola, highly similar to those provided in the labelled dataset.
 
 \begin{figure}
   \centering
@@ -288,52 +299,71 @@ VGG's $3 \times 3$ convolutional layers amount to fixed reception fields. Hence,
   \label{fig:convolution-substitution}
 \end{figure}
 
-Based on the older AlexNet model---which is characterized by implementing a dropout function after each FC layer---the VGG model attempts to compensate for overfitting with a dropout process after each fully connected layer. Figure ~\ref{fig:VGG-vs-AlexNet}
-shows the advantageous architecture of VGG.
-
-\begin{figure}
-  \centering
-  \includegraphics[height=8cm]{VGG-vs-AlexNet}
-  \caption{A comparison of VGG's model structure, ~\cite{ref:}}
-  \label{fig:VGG-vs-AlexNet}
-\end{figure}
-
-However, the downside of this phenomenal accuracy is in its difficult deployment and training process due to the great calculation requirements---a disadvantage both in processing speed and memory requirements. 
+Based on the older AlexNet model---which is characterized by implementing a dropout function after each FC layer---the VGG model attempts to compensate for overfitting with a dropout process after each fully connected layer. However, the downside of VGG's accuracy is in its difficult deployment and training process due to the great calculation requirements of such a computationally-heavy model---a disadvantage both in processing speed and memory requirements. 
 
 The network architecture weights themselves are quite large. Due to its depth and number of fully-connected nodes, the VGG model itself is over 574MB for VGG19. Hence, the biggest drawbacks of VGG, despite its good depth and accuracy, would be hard to deploy onto \thecompany{}'s GPR systems, and would only be something usable in EKKO Project, a post-processing software product. Due to this great drawback, the trade-off for accuracy of the VGG19 model is deemed too large and expensive to be used in this hyperbola classification situation.
 
+\subsection{Decision}
+After an overall comparison of the three models, the most advantageous one seems to be MobileNet. It has a good trade-off between its small deployable size versus its accuracy in performance. However, MobileNet's small size is what puts this model above the rest; on a GPR device, memory and processing power is limited to less than 4GB at X GHz, not including the resource requirements for the pre-existing GPR data collection software. As it's similar to our day to day current mobile devices, MobileNet's potential deployment to an ARM system is more likely to succeed.
 
-\section{Results}
+As for the other two, considerations have been made, notably for Inception V3's highly efficient training to model size ratio, making it a very good candidate for usage in higher performing environments. However, the final decision was based on future potential application and usage, as well as ease of training, and hence---although very close---the Inception model was ruled out. 
 
-Through the proof-of-concept classifier, experimental results show that MobileNet is about 3 times as fast as Inception and 10 times as fast as VGG, running at an average of 26 seconds per batch of 24 images. Despite slightly lower accuracy, it still performed reasonably accurate, with over 4000 steps of training using a pre-processed labelled dataset of 171 images. 
+Finally, although VGG is quite accurate out of the three models examined, deployment and training in such a short time frame is simply not feasible enough, and hence, VGG 19 was ruled out. 
+ 
+
+\section{Concluding Results}
+Through the proof-of-concept classifier, experimental results show that MobileNet is about 3 times as fast as Inception and 10 times as fast as VGG, running at an average of 27 seconds per batch of 24 images, as seen in Figure ~\ref{fig:training-rate}. Despite slightly lower accuracy, it still performed reasonably accurate, with over 6000 steps of training using a pre-processed labelled dataset of 171 images. Its loss---initially at 12.83---was reduced to an average of 1.8 per step, reaching as low as 1.12. 
 
 \begin{figure}
   \centering
-  \includegraphics[height=8cm]{VGG-vs-AlexNet}
-  \caption{~\cite{ref:}}
-  \label{fig:VGG-vs-AlexNet}
+  \includegraphics[height=7cm]{training-rate}
+  \caption{Initial training, loss at 12.83 and rate of ~27 seconds per batch.}
+  \label{fig:training-rate}
 \end{figure}
 
+From around 1300 steps to 4000 steps, MobileNet V1 performs quite well in improving itself, as seen in Figure ~\ref{fig:medium-detection} and \ref{fig:medium-detection-improvements}.
 
-\section{Conclusions}
+\begin{figure}
+  \centering
+  \includegraphics[height=7cm]{medium-detection}
+  \caption{Initial detection tested at 1300 steps, which took approximately 10 hours to train.}
+  \label{fig:medium-detection}
+\end{figure}
 
+\begin{figure}
+  \centering
+  \includegraphics[height=7cm]{medium-detection-improvements}
+  \caption{Results of the same image, after over 4000 steps of training over the course of 2 days.}
+  \label{fig:medium-detection-improvements}
+\end{figure}
+
+With further iterations and adjusting the learning rate along the way, the boxes detecting hyperbola are tightened. As well, less obvious hyperbola are detected with overall higher confidence percentage, going from 79\% in Figure \ref{fig:results-step1300} to both 88\% in Figure \ref{fig:results-step5000} after 6000 steps. 
+
+\begin{figure}
+  \centering
+  \includegraphics[height=8cm]{results-step1300}
+  \caption{Phase one testing}
+  \label{fig:results-step1300}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \includegraphics[height=8cm]{results-step5000}
+  \caption{Phase two testing on the same dataset}
+  \label{fig:results-step5000}
+\end{figure}
+
+In the end, the model's output graph totalled to about 22.2MB, which opens up the possibility of a very lightweight memory-efficient deployment onto \thecompany{}'s GPR products.
+\pagebreak
+\subsection{Conclusion}
+All in all, the choice of MobileNet V1 as the CNN training architecture was a successful decision. Over the course of a couple of days and with merely 171 labelled images, the hyperbola classifier's performance has exceeded my expectations. MobileNet is indeed both lightweight and accurate enough for rudimentary hyperbola detection, despite the large variability in how hyperbolas present themselves in GPR data. 
 
 \section{Recommendations}
-My proof-of-concept consists of three training iterations
+My proof-of-concept consisted of three training iterations, totalling to over 6000 steps. Although successful, this is but a limited comparison of a small selection of models---though three very well-known models. 
 
+As well, hyperbola detection and identification has proven itself to be a problem difficult to tailor to its variability. Throughout the training, the challenge of not overfitting the model to take a balanced account of different hyperbolas has presented itself multiple times. At this stage, since the current proof-of-concept was trained using a manually created dataset, it is only a rough representation of hyperbola identification. Needless to say, to attempt to capture the full complexity of the problem, a better breadth of images---a wide variety of hyperbolas in different environments, different soil calibrations, different collection speeds and GPR stacking---is required to avoid the model to over-fit to noisy or coincidental features in the GPR data.
 
-However, this is but a limited comparison of a small selection of models---though three very successful models. 
-
-
-As well, needless to say, 
-hyperbola detection and identification has proven itself to be a problem difficult to tailor to 
-
-
-at this stage, the current proof-of-concept was trained within a manually created dataset, which is only a rough representation of hyperbola identification. To attempt to capture the full complexity of the problem, a better breadth of images---a wide variety of hyperbolas in different environments, different soil calibrations, different collection speeds and GPR stacking---is required to avoid the model to over-fit to noisy or coincidental features in the GPR data.
-
-
-No thorough understanding of the complexity of these machine learning models, which is a challenge to adapt and make changes to the CNN.
-If scaled or applied to the problem naively, certain computational gains during training can be lost, which immediately voids its advantage over other models. 
+In terms of expanding the model, without thorough understanding of the effects of each transformation, certain computational gains during training can be lost. If scaled or applied to the problem naively, MobileNet's advantage in its performance to size relation over other similarly performing models may immediately be voided.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% BACK MATTER
@@ -353,8 +383,9 @@ If scaled or applied to the problem naively, certain computational gains during 
 % This is normal.  Now you run BiBTeX in order to generate the proper
 % layout for the references.  After this, you run LaTeX once more.
 
-\printbibliography[heading=bibintoc]
-
+%\printbibliography[heading=bibintoc]
+\bibliographystyle{ieeetr}
+\bibliography{uw-wkrpt-bib}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% APPENDICES

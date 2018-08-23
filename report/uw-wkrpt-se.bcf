@@ -1924,12 +1924,7 @@
     <bcf:datasource type="file" datatype="bibtex">uw-wkrpt-bib.bib</bcf:datasource>
   </bcf:bibdata>
   <bcf:section number="0">
-    <bcf:citekey order="9">cs231n_cnn</bcf:citekey>
-    <bcf:citekey order="10">ref:</bcf:citekey>
-    <bcf:citekey order="11">ref:</bcf:citekey>
-    <bcf:citekey order="12">ref:</bcf:citekey>
-    <bcf:citekey order="13">ref:</bcf:citekey>
-    <bcf:citekey order="14">ref:</bcf:citekey>
+    <bcf:citekey order="14">ref:cs231n_cnn</bcf:citekey>
     <bcf:citekey order="15">ref:</bcf:citekey>
     <bcf:citekey order="16">ref:</bcf:citekey>
     <bcf:citekey order="17">ref:</bcf:citekey>
@@ -1937,11 +1932,26 @@
     <bcf:citekey order="19">ref:</bcf:citekey>
     <bcf:citekey order="20">ref:</bcf:citekey>
     <bcf:citekey order="21">ref:</bcf:citekey>
-    <bcf:citekey order="22">ref:das_2017</bcf:citekey>
-    <bcf:citekey order="23">ref:</bcf:citekey>
-    <bcf:citekey order="24">ref:</bcf:citekey>
-    <bcf:citekey order="25">ref:</bcf:citekey>
+    <bcf:citekey order="22">ref:</bcf:citekey>
+    <bcf:citekey order="23">ref:Canziani_et_al</bcf:citekey>
+    <bcf:citekey order="24">ref:Canziani_et_al</bcf:citekey>
+    <bcf:citekey order="25">ref:Canziani_et_al</bcf:citekey>
     <bcf:citekey order="26">ref:</bcf:citekey>
+    <bcf:citekey order="27">ref:</bcf:citekey>
+    <bcf:citekey order="28">ref:</bcf:citekey>
+    <bcf:citekey order="29">ref:</bcf:citekey>
+    <bcf:citekey order="30">ref:</bcf:citekey>
+    <bcf:citekey order="31">ref:</bcf:citekey>
+    <bcf:citekey order="32">ref:</bcf:citekey>
+    <bcf:citekey order="33">ref:</bcf:citekey>
+    <bcf:citekey order="34">ref:</bcf:citekey>
+    <bcf:citekey order="35">ref:</bcf:citekey>
+    <bcf:citekey order="36">ref:</bcf:citekey>
+    <bcf:citekey order="37">ref:</bcf:citekey>
+    <bcf:citekey order="38">ref:</bcf:citekey>
+    <bcf:citekey order="39">ref:</bcf:citekey>
+    <bcf:citekey order="40">ref:</bcf:citekey>
+    <bcf:citekey order="41">ref:</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="none">
