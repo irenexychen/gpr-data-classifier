@@ -1,7 +1,6 @@
 # gpr-data-classifier
 
 Proof-of-concept side project for Sensors & Software Inc.
-((because they told me to write a report, so why not ahahaha))
 
 ### Background Information ###
 ##### What is a hyperbola? #####
